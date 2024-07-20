@@ -22,6 +22,7 @@ public class DatabaseCommands {
             @ShellOption(value = {"-u", "--url"}) String url,
             @ShellOption(value = {"-t", "--type" }) DatabaseType type
     ) {
+        // check connection to db
         // create a meta dir
         // write to file
     }
@@ -34,5 +35,13 @@ public class DatabaseCommands {
             @ShellOption(value = {"-a", "--alias"}) String alias
     ) {
         // remove data from meta file
+    }
+
+    @ShellMethod(
+            key = "list databases",
+            value = "Reads databases from the engine."
+    )
+    public void removeDatabase() {
+        // get data from meta file
     }
 }

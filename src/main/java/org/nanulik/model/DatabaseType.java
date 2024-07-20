@@ -5,5 +5,15 @@ package org.nanulik.model;
  * 13.07.24
  */
 public enum DatabaseType {
-    POSTGRES
+    POSTGRES("");
+
+    private String databaseDriver;
+
+    DatabaseType(String databaseDriver) {
+        this.databaseDriver = databaseDriver;
+    }
+
+    public String getDatabaseDriver() {
+        return databaseDriver;
+    }
 }
