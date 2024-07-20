@@ -9,6 +9,9 @@ import java.util.List;
 public class DatabaseMetadata {
     private List<DatabaseMapping> databases; // todo : map
 
+    public DatabaseMetadata() {
+    }
+
     public DatabaseMetadata(List<DatabaseMapping> databases) {
         this.databases = databases;
     }

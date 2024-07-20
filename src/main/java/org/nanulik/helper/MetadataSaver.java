@@ -17,20 +17,20 @@ import java.io.IOException;
 @Component
 public class MetadataSaver {
 
-    @Value("{}")
+    @Value("${persistor.file.path}")
     private String fileName;
 
     private final ObjectMapper objectMapper;
 
-    public MetadataSaver(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public MetadataSaver() {
+        this.objectMapper = new ObjectMapper();
     }
 
     public DatabaseMetadata readDatabaseMetadata() {
         try(final FileInputStream file = new FileInputStream(fileName)) {
             return objectMapper.readValue(file, DatabaseMetadata.class);
         } catch (final IOException e) {
-            // throw another exception
+            e.printStackTrace();
         }
 
         return null;
