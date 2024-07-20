@@ -5,7 +5,9 @@ import org.nanulik.model.DatabaseMetadata;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @author Nane Petrosyan
@@ -34,7 +36,7 @@ public class MetadataSaver {
         return null;
     }
 
-    public void readDatabaseMetadata(final DatabaseMetadata databaseMetadata) {
+    public void persistDatabaseMetadata(final DatabaseMetadata databaseMetadata) {
         try(final FileOutputStream file = new FileOutputStream(fileName)) {
             objectMapper.writeValue(file, DatabaseMetadata.class);
         } catch (final IOException e) {

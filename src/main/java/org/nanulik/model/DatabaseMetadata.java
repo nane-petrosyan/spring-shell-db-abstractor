@@ -7,7 +7,7 @@ import java.util.List;
  * 20.07.24
  */
 public class DatabaseMetadata {
-    private List<DatabaseMapping> databases;
+    private List<DatabaseMapping> databases; // todo : map
 
     public DatabaseMetadata(List<DatabaseMapping> databases) {
         this.databases = databases;

@@ -8,6 +8,11 @@ public class DatabaseDetails {
     private DatabaseType type;
     private String url;
 
+    public DatabaseDetails(DatabaseType type, String url) {
+        this.type = type;
+        this.url = url;
+    }
+
     public DatabaseType getType() {
         return type;
     }
