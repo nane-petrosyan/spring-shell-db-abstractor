@@ -17,9 +17,9 @@ public class DatabaseService {
     private final MetadataSaver metadataSaver;
     private final DatabaseMetadata databaseMetadata;
 
-    public DatabaseService(MetadataSaver metadataSaver) {
+    public DatabaseService(MetadataSaver metadataSaver, DatabaseMetadata databaseMetadata) {
         this.metadataSaver = metadataSaver;
-        this.databaseMetadata = null; // todo
+        this.databaseMetadata = databaseMetadata;
     }
 
     public DatabaseMetadata readDatabases() {
@@ -28,17 +28,13 @@ public class DatabaseService {
 
     public void addDatabaseMapping(final String url, final String alias, final DatabaseType type) {
         databaseMetadata.getDatabases().add(new DatabaseMapping(alias, new DatabaseDetails(type, url))); // todo
-
-        metadataSaver.persistDatabaseMetadata( // todo
-                databaseMetadata
-        );
     }
 
     public void removeDatabaseMapping(final String alias) {
         // todo
+    }
 
-        metadataSaver.persistDatabaseMetadata(
-                databaseMetadata
-        );
+    public DatabaseMetadata getDatabaseMetadata() {
+        return databaseMetadata;
     }
 }
