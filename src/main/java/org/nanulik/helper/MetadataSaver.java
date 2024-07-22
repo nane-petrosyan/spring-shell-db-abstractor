@@ -3,11 +3,12 @@ package org.nanulik.helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.nanulik.model.DatabaseMetadata;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.annotation.PostConstruct;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * @author Nane Petrosyan
@@ -40,6 +41,26 @@ public class MetadataSaver {
             objectMapper.writeValue(file, DatabaseMetadata.class);
         } catch (final IOException e) {
             // throw another exception
+        }
+    }
+
+    @PostConstruct
+    private void prepareMetadataSpace() {
+        final File file = new File(fileName);
+
+        if (!file.exists()) {
+            System.out.println("Creating metadata space.");
+            try {
+                Files.createFile(Paths.get(fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try (FileWriter writer = new FileWriter(fileName)) {
+                objectMapper.writeValue(writer, new DatabaseMetadata(List.of()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
