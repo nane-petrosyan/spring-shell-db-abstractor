@@ -1,6 +1,5 @@
 package org.nanulik.service;
 
-import org.nanulik.helper.MetadataSaver;
 import org.nanulik.model.DatabaseDetails;
 import org.nanulik.model.DatabaseMapping;
 import org.nanulik.model.DatabaseMetadata;
@@ -14,16 +13,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DatabaseService {
-    private final MetadataSaver metadataSaver;
     private final DatabaseMetadata databaseMetadata;
 
-    public DatabaseService(MetadataSaver metadataSaver, DatabaseMetadata databaseMetadata) {
-        this.metadataSaver = metadataSaver;
+    public DatabaseService(DatabaseMetadata databaseMetadata) {
         this.databaseMetadata = databaseMetadata;
     }
 
     public DatabaseMetadata readDatabases() {
-        return metadataSaver.readDatabaseMetadata();
+        return databaseMetadata;
     }
 
     public void addDatabaseMapping(final String url, final String alias, final DatabaseType type) {
@@ -32,9 +29,5 @@ public class DatabaseService {
 
     public void removeDatabaseMapping(final String alias) {
         // todo
-    }
-
-    public DatabaseMetadata getDatabaseMetadata() {
-        return databaseMetadata;
     }
 }

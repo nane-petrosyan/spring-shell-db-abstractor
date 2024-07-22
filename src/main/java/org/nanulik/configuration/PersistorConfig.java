@@ -4,24 +4,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.nanulik.helper.MetadataSaver;
 import org.nanulik.model.DatabaseMetadata;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Nane Petrosyan
  * 20.07.24
  */
 
-@Component
+@Configuration
 public class PersistorConfig {
-    private final MetadataSaver metadataSaver;
 
-    public PersistorConfig(MetadataSaver metadataSaver) {
-        this.metadataSaver = metadataSaver;
+    @Bean
+    public MetadataSaver metadataSaver() {
+        return new MetadataSaver();
     }
 
     @Bean
     public DatabaseMetadata databaseMetadata() {
-        return metadataSaver.readDatabaseMetadata();
+        return metadataSaver().readDatabaseMetadata();
     }
 
     @Bean

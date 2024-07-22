@@ -14,7 +14,6 @@ import java.io.IOException;
  * 20.07.24
  */
 
-@Component
 public class MetadataSaver {
 
     @Value("${persistor.file.path}")
