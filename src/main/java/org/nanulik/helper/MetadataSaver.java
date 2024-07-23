@@ -1,6 +1,8 @@
 package org.nanulik.helper;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.nanulik.model.DatabaseDetails;
 import org.nanulik.model.DatabaseMetadata;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -8,7 +10,7 @@ import javax.annotation.PostConstruct;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nane Petrosyan
@@ -28,7 +30,9 @@ public class MetadataSaver {
 
     public DatabaseMetadata readDatabaseMetadata() {
         try(final FileInputStream file = new FileInputStream(fileName)) {
-            return objectMapper.readValue(file, DatabaseMetadata.class);
+            return new DatabaseMetadata(
+                    objectMapper.readValue(file, new TypeReference<Map<String, DatabaseDetails>>() {})
+            );
         } catch (final IOException e) {
             e.printStackTrace();
         }
@@ -38,7 +42,7 @@ public class MetadataSaver {
 
     public void persistDatabaseMetadata(final DatabaseMetadata databaseMetadata) {
         try(final FileOutputStream file = new FileOutputStream(fileName)) {
-            objectMapper.writeValue(file, DatabaseMetadata.class);
+            objectMapper.writeValue(file, databaseMetadata.getDatabases());
         } catch (final IOException e) {
             // throw another exception
         }
@@ -57,7 +61,7 @@ public class MetadataSaver {
             }
 
             try (FileWriter writer = new FileWriter(fileName)) {
-                objectMapper.writeValue(writer, new DatabaseMetadata(List.of()));
+                objectMapper.writeValue(writer, Map.of());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,26 +1,26 @@
 package org.nanulik.model;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nane Petrosyan
  * 20.07.24
  */
 public class DatabaseMetadata {
-    private List<DatabaseMapping> databases; // todo : map
+    private Map<String, DatabaseDetails> databases; // todo : map
 
     public DatabaseMetadata() {
     }
 
-    public DatabaseMetadata(List<DatabaseMapping> databases) {
+    public DatabaseMetadata(Map<String, DatabaseDetails> databases) {
         this.databases = databases;
     }
 
-    public List<DatabaseMapping> getDatabases() {
+    public Map<String, DatabaseDetails> getDatabases() {
         return databases;
     }
 
-    public void setDatabases(List<DatabaseMapping> databases) {
+    public void setDatabases(Map<String, DatabaseDetails> databases) {
         this.databases = databases;
     }
 }

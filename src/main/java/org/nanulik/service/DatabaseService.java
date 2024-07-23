@@ -1,7 +1,6 @@
 package org.nanulik.service;
 
 import org.nanulik.model.DatabaseDetails;
-import org.nanulik.model.DatabaseMapping;
 import org.nanulik.model.DatabaseMetadata;
 import org.nanulik.model.DatabaseType;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class DatabaseService {
     }
 
     public void addDatabaseMapping(final String url, final String alias, final DatabaseType type) {
-        databaseMetadata.getDatabases().add(new DatabaseMapping(alias, new DatabaseDetails(type, url))); // todo
+        databaseMetadata.getDatabases().put(alias, new DatabaseDetails(type, url));
     }
 
     public void removeDatabaseMapping(final String alias) {

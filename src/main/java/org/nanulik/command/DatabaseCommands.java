@@ -49,7 +49,7 @@ public class DatabaseCommands {
             key = "list databases",
             value = "Reads databases from the engine."
     )
-    public List<DatabaseMapping> listDatabases() {
-        return databaseService.readDatabases().getDatabases();
+    public DatabaseMetadata listDatabases() {
+        return databaseService.readDatabases();
     }
 }
