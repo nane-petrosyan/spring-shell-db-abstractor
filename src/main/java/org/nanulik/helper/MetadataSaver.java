@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.nanulik.model.DatabaseDetails;
 import org.nanulik.model.DatabaseMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +20,7 @@ import java.util.Map;
  */
 
 public class MetadataSaver {
+    private static final Logger logger = LoggerFactory.getLogger(MetadataSaver.class);
 
     @Value("${persistor.file.path}")
     private String fileName;
@@ -53,7 +56,7 @@ public class MetadataSaver {
         final File file = new File(fileName);
 
         if (!file.exists()) {
-            System.out.println("Creating metadata space.");
+            logger.info("Creating metadata space.");
             try {
                 Files.createFile(Paths.get(fileName));
             } catch (IOException e) {
