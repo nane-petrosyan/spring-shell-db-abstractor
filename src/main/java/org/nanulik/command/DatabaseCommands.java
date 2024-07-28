@@ -1,14 +1,10 @@
 package org.nanulik.command;
 
-import org.nanulik.model.DatabaseMapping;
-import org.nanulik.model.DatabaseMetadata;
 import org.nanulik.model.DatabaseType;
 import org.nanulik.service.DatabaseService;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-
-import java.util.List;
 
 /**
  * @author Nane Petrosyan
@@ -49,7 +45,7 @@ public class DatabaseCommands {
             key = "list databases",
             value = "Reads databases from the engine."
     )
-    public DatabaseMetadata listDatabases() {
-        return databaseService.readDatabases();
+    public String listDatabases() {
+        return databaseService.readDatabases().toString();
     }
 }

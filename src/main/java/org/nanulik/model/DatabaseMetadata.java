@@ -1,5 +1,8 @@
 package org.nanulik.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Map;
 
 /**
@@ -22,5 +25,16 @@ public class DatabaseMetadata {
 
     public void setDatabases(Map<String, DatabaseDetails> databases) {
         this.databases = databases;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new ObjectMapper().writeValueAsString(databases);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
